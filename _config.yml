@@ -1,0 +1,10 @@
+# Site settings
+title: TWAS
+tag_text: TWAS
+description: Transcriptome-wide Association Study (via imputation)
+
+# Build settings
+markdown: kramdown
+exclude: ["README.md"]
+sass:
+  style: compressed

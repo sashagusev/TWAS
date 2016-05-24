@@ -2,7 +2,7 @@
 layout: default
 ---
 
-## Transcriptome-Wide Association Study (via imputation)
+## (imputed) Transcriptome-Wide Association Study
 
 **Due to large size, all code and datasets can be downloaded at [https://data.broadinstitute.org/alkesgroup/TWAS](https://data.broadinstitute.org/alkesgroup/TWAS)**
 
@@ -18,12 +18,14 @@ For questions or comments, contact Alexander Gusev [[agusev@hsph.harvard.edu](ma
 
 ## Outline
 
-1. Typical TWAS analysis
-2. Reference expression data
-3. Computing expression weights from genotype data
-4. Omnibus test
-5. FAQ
-6. Change Log
+1. [Typical TWAS analysis](#typical-twas-analysis)
+2. [Reference expression data](#reference-expression-data)
+3. [Computing your own expression weights](#computing-your-own-expression-weights)
+4. [Testing multiple tissues jointly](#testing-multiple-tissues-jointly)
+5. [FAQ](#faq)
+6. [Change Log](#change-log)
+
+---
 
 ## Typical TWAS analysis
 
@@ -57,7 +59,10 @@ bash bin/TWAS.sh \
 For example, to run this using the GWAS summary statistics from the Locke et al. BMI study on gene CCDC101:
 
 ~~~
-bash bin/TWAS.sh WEIGHTS_YFS/CCDC101/CCDC101.wgt WEIGHTS_YFS/CCDC101/CCDC101.LOCKE_BMI.GWAS.zscore CCDC101.LOCKE_BMI.TWAS
+bash bin/TWAS.sh \
+WEIGHTS_YFS/CCDC101/CCDC101.wgt \
+WEIGHTS_YFS/CCDC101/CCDC101.LOCKE_BMI.GWAS.zscore \
+CCDC101.LOCKE_BMI.TWAS
 ~~~
 
 This will generate the file `CCDC101.LOCKE_BMI.TWAS.imp`, which contains the imputed Z-score and the precision of the Z-score as second to last and last entries. The final TWAS Z-score is computed as `$5/sqrt($6)` from this file. The output should be identical to the file `WEIGHTS_YFS/CCDC101/CCDC101.LOCKE_BMI.TWAS.imp`
@@ -75,6 +80,8 @@ Each directory contains the following files for a given gene:
 The expression weight data includes summary statistics for each locus from the Locke et al. BMI study.
 Make sure the summary statistics you use match the strand allele codes as well as the physical positions for the SNPs at each locus. If in doubt, remove any strand ambiguous (A-T, G-C) SNPs.
 The summary statistics can be partially overlapping with the expression weight data, but they must have the header and be in sorted physical order.
+
+---
 
 ## Reference expression data
 
@@ -96,7 +103,9 @@ These weights were not used in the paper but are provided for further analyses.
 
 *Warning, the extracted files are large (>1GB). All data is in flat, human readable files.*
 
-## Computing expression weights from genotype data
+---
+
+## Computing your own expression weights
 The script for pre-computing expression weights assumes that your data is in a standard PLINK format file (ped/map, not binary), which contains only the desired SNPs in the cis-locus, and expression set as the phenotype.
 
 The script is executed as follows:
@@ -113,8 +122,9 @@ bash bin/TWAS_get_weights.sh CCDC101 WEIGHTS_YFS/CCDC101/CCDC101.wgt
 
 For maximum power, we recommend computing the genetic value of expression using BLUP/BSLMM and setting that as the phenotype.
 
+---
 
-## Omnibus test
+## Testing multiple tissues jointly
 
 We proposed an N degree of freedom test for effect across N tissues after adjusting for predictor correlation (as estimated in the YFS data).
 
@@ -169,7 +179,7 @@ similar to the TWAS data where the tests will be applied.
 The script automatically identifies the number of reference panels and constructs
 the corresponding NxN correlation matrix.
 
-### Notes
+### NB
 
 * We have not evaluated the performance of this test on genes that are only
 significantly heritable in a single cohort.
@@ -181,6 +191,8 @@ that are expected to be correlated in the same direction. We recommend care when
 performing the test (i.e. getting many significant genes is not an indication that 
 everything worked correctly) and to double-check that marginal TWAS Z-scores are
 at least weakly consistent with an association.
+
+---
 
 ## FAQ
 
@@ -205,6 +217,8 @@ In principle having different sample sizes will violate the assumptions made in 
 TWAS has analogs to co-localization and Mendelian randomization (with gene expression as one of the traits). [COLOC](https://github.com/chr1swallace/coloc) from the Wallace lab performs Bayesian co-localization analyses. There are many approaches to Mendelian randomization, but [this code](https://github.com/sb452/mr-code) from Stephen Burgess is a great primer; as well as the [SMR/HEIDI](http://cnsgenomics.com/software/smr/) test from the Yang lab. The [MetaXcan](https://github.com/hakyimlab/MetaXcan) and [PrediXcan](https://github.com/hakyimlab/PrediXcan) suite of tools from the Im lab performs gene-based association tests with and without summary data.
 
 You may also be interested in [HESS](http://bogdan.bioinformatics.ucla.edu/software/hess/) to estimate local heritability; [PAINTOR](http://bogdan.bioinformatics.ucla.edu/software/paintor/) to fine-map causal variants; [LD-score Regression](https://github.com/bulik/ldsc) to estimate genome-wide heritability and genetic correlation.
+
+---
 
 ## Change Log
 

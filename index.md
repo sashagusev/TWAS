@@ -2,11 +2,9 @@
 layout: default
 ---
 
-## (imputed) Transcriptome-Wide Association Study
+## Transcriptome-Wide Association Study (via imputation)
 
-**Due to large size, all code and datasets can be downloaded at [https://data.broadinstitute.org/alkesgroup/TWAS](https://data.broadinstitute.org/alkesgroup/TWAS)**
-
-This page provides the documentation and data for estimating association statistics between gene expression and disease using using summary-level GWAS data. We provide precomputed gene expression statistics from three studies to facilitate analysis. Please refer to the following manuscripts:
+This page provides the documentation and data for estimating association statistics between gene expression and phenotypes from summary-level GWAS data. We provide precomputed gene expression weights from three studies to facilitate analysis. Please refer to the following manuscripts for details:
 
 | Gusev et al. "Integrative approaches for large-scale transcriptome-wide association studies"  2016 *Nature Genetics*
 
@@ -15,6 +13,8 @@ This page provides the documentation and data for estimating association statist
 See also [http://bogdan.bioinformatics.ucla.edu/software/impg/](http://bogdan.bioinformatics.ucla.edu/software/impg/) for details on IMPG
 
 For questions or comments, contact Alexander Gusev [[agusev@hsph.harvard.edu](mailto:agusev@hsph.harvard.edu)] or Bogdan Pasaniuc [[pasaniuc@ucla.edu](mailto:pasaniuc@ucla.edu)].
+
+**Due to large size, all code and datasets are hosted at [https://data.broadinstitute.org/alkesgroup/TWAS](https://data.broadinstitute.org/alkesgroup/TWAS)**
 
 ## Outline
 
@@ -228,3 +228,5 @@ You may also be interested in [HESS](http://bogdan.bioinformatics.ucla.edu/softw
 | 2016/02/09 | Updated conversion script to automatically remove monomorphic SNPs
 | 2015/12/10 | Updated conversion script to deal with char alleles
 | 2015/12/07 | First official release
+
+*Logo by [Ryan Beck](https://thenounproject.com/Ryaaaan/) from The Noun Project*

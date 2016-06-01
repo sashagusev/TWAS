@@ -106,7 +106,8 @@ These weights were not used in the paper but are provided for further analyses.
 ---
 
 ## Computing your own expression weights
-The script for pre-computing expression weights assumes that your data is in a standard PLINK format file (ped/map, not binary), which contains only the desired SNPs in the cis-locus, and expression set as the phenotype.
+
+The script for computing expression weights yourself works **one gene at a time**, taking as input a standard PLINK format file (ped/map, not binary) which contains only the desired SNPs in the cis-locus of the gene (or any other desired SNPs) and expression of the gene set as the phenotype (6th field of the ped file).
 
 The script is executed as follows:
 
@@ -120,7 +121,7 @@ for example, assuming you have a CCDC101.ped and CCDC101.map file (not provided)
 bash bin/TWAS_get_weights.sh CCDC101 WEIGHTS_YFS/CCDC101/CCDC101.wgt
 ~~~
 
-For maximum power, we recommend computing the genetic value of expression using BLUP/BSLMM and setting that as the phenotype.
+For maximum power, we recommend computing the genetic value of expression using BLUP/BSLMM and setting that as the phenotype. *WARNING: No additional filtering is done to the included SNPs or the expression.*
 
 ---
 

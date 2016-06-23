@@ -72,7 +72,7 @@ Each directory contains the following files for a given gene:
 | *.wgt.map	| The map for SNPs at the cis locus, with header row indicating format.
 | *.wgt.cor	| The SNP-Expression correlation (i.e. marginal eQTL statistics), one line per SNP.
 | *.wgt.ld	| The SNP-SNP correlation/LD matrix, square.
-| *.LOCKE_BMI.GWAS.zscore | The GWAS summary statistics (from Locke et al. GWAS of BMI) for the cis locus, with header row indicating format.
+| *.LOCKE_BMI.GWAS.zscore | The GWAS summary statistics (from Locke et al. GWAS of BMI) for the cis locus, with header row indicating format: [SNP] [POSITION] [ALLELE1] [ALLELE2] [Z-SCORE]
 | *.LOCKE_BMI.TWAS.imp	| The imputed TWAS Z-score for this locus (i.e. the value we're interested in).
 
 ### GWAS summary statistics
@@ -80,6 +80,8 @@ Each directory contains the following files for a given gene:
 The expression weight data includes summary statistics for each locus from the Locke et al. BMI study.
 Make sure the summary statistics you use match the strand allele codes as well as the physical positions for the SNPs at each locus. If in doubt, remove any strand ambiguous (A-T, G-C) SNPs.
 The summary statistics can be partially overlapping with the expression weight data, but they must have the header and be in sorted physical order.
+
+We provide a script to facilitate matching between your GWAS summary statistics and the pre-computed reference expression data which can be **[downloaded here](https://data.broadinstitute.org/alkesgroup/TWAS/ETC/CLEAN_ZSCORES.tar.bz2)**. The script takes a genome-wide Z-score file in the above format and orients it against alleles in the reference data (also provided). You can then subset this file for each gene you are running the TWAS on. Note: this will also remove ambiguous A/T and G/C SNPs.
 
 ---
 

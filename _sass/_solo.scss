@@ -15,6 +15,15 @@ body {
   color: #333;
 }
 
+.warning {
+  margin: 10% 0 40% 0;
+  line-height: 25px;
+  background: #ece7f2;
+  border: 1px solid #a6bddb;
+  padding: 20px;
+  border-radius: 5px;
+}
+
 @media (min-width: 50rem) {
   body {
     margin-top: 5rem;
